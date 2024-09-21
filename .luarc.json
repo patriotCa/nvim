@@ -1,0 +1,11 @@
+{
+    "diagnostics.disable": [
+        "missing-fields",
+        "undefined-field",
+        "different-requires"
+    ],
+    "diagnostics.globals": [
+        "vim",
+        "firstToUpper"
+    ]
+}
