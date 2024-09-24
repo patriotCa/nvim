@@ -25,6 +25,11 @@ local changed_themes = {
       darker_black = "#161616",
     },
   },
+  chadracula = {
+    base_30 = {
+      darker_black = "#282A36",
+    },
+  },
 }
 
 return changed_themes
