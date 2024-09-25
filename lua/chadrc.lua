@@ -10,8 +10,8 @@ local hl = require "utils.ui.hl"
 local ct = require "utils.ui.ct"
 
 M.base46 = {
-  theme = "chadracula", -- default theme
-  theme_toggle = { "chadracula", "one_light" },
+  theme = "gruvbox", -- default theme
+  theme_toggle = { "gruvbox", "one_light" },
   changed_themes = ct,
   transparency = false,
   hl_add = hl.add,

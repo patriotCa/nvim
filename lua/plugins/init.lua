@@ -200,6 +200,7 @@ return {
   },
   {
     "NvChad/nvim-colorizer.lua",
+    enabled = false,
     event = "User FilePost",
     opts = {
       user_default_options = { names = false },
@@ -345,6 +346,13 @@ return {
     end,
     config = function(_, opts)
       require("fidget").setup(opts)
+    end,
+  },
+  {
+    "brenoprata10/nvim-highlight-colors",
+    lazy = false,
+    config = function()
+      require("nvim-highlight-colors").setup {}
     end,
   },
 }
