@@ -7,6 +7,7 @@ local options = {
   },
   scope = {
     enabled = true,
+    show_start = false,
     highlight = "IblScopeChar",
     include = {
       node_type = { ["*"] = { "*" } },
