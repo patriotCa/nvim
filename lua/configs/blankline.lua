@@ -1,12 +1,32 @@
 dofile(vim.g.base46_cache .. "blankline")
 
 local options = {
-  indent = { char = "│", highlight = "IblChar" },
-  scope = {
+  indent = {
     char = "│",
-    highlight = "IblScopeChar",
-    enabled = false,
+    highlight = "IblChar",
   },
+  scope = {
+    enabled = true,
+    highlight = "IblScopeChar",
+    include = {
+      node_type = { ["*"] = { "*" } },
+      -- node_type = { typescriptreact = { "return_statement", "table_constructor" } },
+    },
+    -- exclude = {
+    --   node_type = {
+    --     ["*"] = {
+    --       "source_file",
+    --       "program",
+    --       "chunk",
+    --       "module",
+    --     },
+    --   },
+    -- },
+  },
+  -- whitespace = {
+  --   highlight = "IblScopeChar",
+  --   remove_blankline_trail = false,
+  -- },
   exclude = {
     buftypes = {
       "nofile",

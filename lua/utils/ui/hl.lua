@@ -42,10 +42,6 @@ M.override = {
   CursorLine = {
     bg = "black2",
   },
-  NvimTreeRootFolder = {
-    bold = true,
-    fg = "green",
-  },
   TbLineTabCloseBtn = {
     fg = "red",
   },
@@ -110,12 +106,29 @@ M.override = {
   ["@parameter"] = {
     -- italic = true,
   },
+  NvimTreeCursorLine = {
+    bg = "black2",
+    bold = true,
+  },
+  NvimTreeIndentMarker = {
+    fg = "nord_blue",
+  },
+  NvimTreeRootFolder = {
+    fg = "blue",
+    bold = true,
+  },
+  IblChar = {
+    -- fg = "nord_blue",
+  },
+  IblScopeChar = {
+    fg = "nord_blue",
+  },
 }
 
 ---@type HLTable
 M.add = {
-  NvimTreeOpenedFolderName = { fg = "green", bold = true },
-  NvimtreeRootTab = { fg = "folder_bg", bold = true },
+  NvimtreeRootTab = { fg = border_color, bold = true },
+  CustomNotification = { fg = "nord_blue", bold = true, italic = true },
 }
 
 vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "FloatBorder" })

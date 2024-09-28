@@ -26,9 +26,9 @@ return {
       dofile(vim.g.base46_cache .. "blankline")
 
       local hooks = require "ibl.hooks"
-      hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+      -- hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+      -- hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
       require("ibl").setup(opts)
-
       dofile(vim.g.base46_cache .. "blankline")
     end,
   },
@@ -352,7 +352,11 @@ return {
     "brenoprata10/nvim-highlight-colors",
     lazy = false,
     config = function()
-      require("nvim-highlight-colors").setup {}
+      require("nvim-highlight-colors").setup {
+        enable_tailwind = true,
+        exclude_filetypes = { "lazy", "mason", "NvimTree", "nvdash" },
+        exclude_buftypes = {},
+      }
     end,
   },
 }
