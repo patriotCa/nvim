@@ -30,6 +30,15 @@ local changed_themes = {
       darker_black = "#282A36",
     },
   },
+  solarized_dark = {
+    base_30 = {
+      darker_black = "#01161b",
+      black = "#01161b",
+    },
+    base_16 = {
+      base00 = "#01161b",
+    },
+  },
 }
 
 return changed_themes

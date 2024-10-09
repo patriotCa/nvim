@@ -1,6 +1,3 @@
--- load defaults i.e lua_lsp
--- require("nvchad.configs.lspconfig").defaults()
-
 local M = {}
 local map = vim.keymap.set
 

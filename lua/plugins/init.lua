@@ -1,20 +1,25 @@
 return {
   "nvim-lua/plenary.nvim",
   {
-    "NvChad/base46",
+    "nvchad/base46",
     build = function()
       require("base46").load_all_highlights()
     end,
   },
   {
-    "NvChad/ui",
+    "nvchad/ui",
     lazy = false,
+    config = function()
+      require "nvchad"
+    end,
   },
+  "nvchad/volt",
+  "nvchad/minty",
+  "nvchad/menu",
   {
     "nvim-tree/nvim-web-devicons",
     opts = function()
       dofile(vim.g.base46_cache .. "devicons")
-      -- return { override = require "nvchad.icons.devicons" }
       return { override = require "utils.icons.devicons" }
     end,
   },
@@ -27,7 +32,9 @@ return {
 
       -- local hooks = require "ibl.hooks"
       -- hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+
       require("ibl").setup(opts)
+
       dofile(vim.g.base46_cache .. "blankline")
     end,
   },
@@ -42,14 +49,12 @@ return {
     },
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     opts = function()
-      -- return require "nvchad.configs.nvimtree"
       return require "configs.nvimtree"
     end,
   },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    -- keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
     keys = {
       {
         "<leader>?",
@@ -67,6 +72,7 @@ return {
       "v",
       "g",
     },
+    -- keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
     cmd = "WhichKey",
     opts = function()
       return require "configs.whichkey"
@@ -80,24 +86,16 @@ return {
   {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- uncomment for format on save
-    config = function()
-      return require "configs.conform"
-    end,
-  },
-  {
-    "mfussenegger/nvim-lint",
-    -- enabled = false,
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      return require "configs.linter"
-    end,
+    opts = require "configs.conform",
+    -- config = function()
+    --   return require "configs.conform"
+    -- end,
   },
   -- git stuff
   {
     "lewis6991/gitsigns.nvim",
     event = "User FilePost",
     opts = function()
-      -- return require "nvchad.configs.gitsigns"
       return require "configs.gitsigns"
     end,
   },
@@ -106,31 +104,13 @@ return {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     opts = function()
-      -- return require "nvchad.configs.mason"
       return require "configs.mason"
-    end,
-    config = function(_, opts)
-      if opts.ensure_installed then
-        vim.api.nvim_echo({
-          { "\n   ensure_installed has been removed! use M.mason.pkgs table in your chadrc.\n", "WarningMsg" },
-          { "   https://github.com/NvChad/ui/blob/v2.5/lua/nvconfig.lua#L85 \n\n", "FloatBorder" },
-          {
-            "   MasonInstallAll will automatically install all mason packages of tools configured in your plugins. \n",
-            "healthSuccess",
-          },
-          { "   Currently supported plugins are : lspconfig, nvim-lint, conform. \n", "Added" },
-          { "   So dont add them in your chadrc as MasonInstallAll automatically installs them! \n", "Changed" },
-        }, false, {})
-      end
-
-      require("mason").setup(opts)
     end,
   },
   {
     "neovim/nvim-lspconfig",
     event = "User FilePost",
     config = function()
-      -- require("nvchad.configs.lspconfig").defaults()
       require("configs.lspconfig").defaults()
     end,
   },
@@ -146,7 +126,6 @@ return {
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
           require("luasnip").config.set_config(opts)
-          -- require "nvchad.configs.luasnip"
           require "configs.luasnip"
         end,
       },
@@ -175,7 +154,6 @@ return {
       },
     },
     opts = function()
-      -- return require "nvchad.configs.cmp"
       return require "configs.cmp"
     end,
   },
@@ -184,37 +162,7 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     cmd = "Telescope",
     opts = function()
-      -- return require "nvchad.configs.telescope"
       return require "configs.telescope"
-    end,
-    config = function(_, opts)
-      local telescope = require "telescope"
-      telescope.setup(opts)
-
-      -- load extensions
-      for _, ext in ipairs(opts.extensions_list) do
-        telescope.load_extension(ext)
-      end
-    end,
-  },
-  {
-    "NvChad/nvim-colorizer.lua",
-    enabled = false,
-    event = "User FilePost",
-    opts = {
-      user_default_options = { names = false },
-      filetypes = {
-        "*",
-        "!lazy",
-      },
-    },
-    config = function(_, opts)
-      require("colorizer").setup(opts)
-
-      -- execute colorizer as soon as possible
-      vim.defer_fn(function()
-        require("colorizer").attach_to_buffer(0)
-      end, 0)
     end,
   },
   {
@@ -227,7 +175,6 @@ return {
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     opts = function()
-      -- return require "nvchad.configs.treesitter"
       return require "configs.treesitter"
     end,
     config = function(_, opts)
@@ -349,6 +296,7 @@ return {
   },
   {
     "brenoprata10/nvim-highlight-colors",
+    enabled = false,
     lazy = false,
     config = function()
       require("nvim-highlight-colors").setup {

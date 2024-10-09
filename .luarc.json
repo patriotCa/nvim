@@ -2,7 +2,9 @@
     "diagnostics.disable": [
         "missing-fields",
         "undefined-field",
-        "different-requires"
+        "different-requires",
+        "duplicate-set-field",
+        "inject-field"
     ],
     "diagnostics.globals": [
         "vim",

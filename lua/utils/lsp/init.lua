@@ -7,14 +7,14 @@ M.diagnostic_config = function()
     virtual_text = { prefix = "" },
     signs = { text = { [x.ERROR] = "󰅙", [x.WARN] = "", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
     underline = true,
-    float = { border = "single" },
+    float = { border = vim.g.ui_border },
   }
 
   -- Default border style
   local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
   function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
     opts = opts or {}
-    opts.border = "rounded"
+    opts.border = vim.g.ui_border
     return orig_util_open_floating_preview(contents, syntax, opts, ...)
   end
 end

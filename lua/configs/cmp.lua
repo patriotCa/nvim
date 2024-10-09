@@ -1,78 +1,16 @@
-local cmp = require "cmp"
-
 dofile(vim.g.base46_cache .. "cmp")
 
-local cmp_ui = require("nvconfig").ui.cmp
-local cmp_style = cmp_ui.style
-
-local field_arrangement = {
-  atom = { "kind", "abbr", "menu" },
-  atom_colored = { "kind", "abbr", "menu" },
-}
-
-local formatting_style = {
-  -- default fields order i.e completion word + item.kind + item.kind icons
-  fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
-
-  format = function(_, item)
-    -- local icons = require "nvchad.icons.lspkind"
-    local icons = require "utils.icons.lspkind"
-    local icon = (cmp_ui.icons and icons[item.kind]) or ""
-
-    if cmp_style == "atom" or cmp_style == "atom_colored" then
-      icon = " " .. icon .. " "
-      item.menu = cmp_ui.lspkind_text and "   (" .. item.kind .. ")" or ""
-      item.kind = icon
-    else
-      icon = cmp_ui.lspkind_text and (" " .. icon .. " ") or icon
-      item.kind = string.format("%s %s", icon, cmp_ui.lspkind_text and item.kind or "")
-    end
-
-    return item
-  end,
-}
-
-local function border(hl_name)
-  return {
-    { "╭", hl_name },
-    { "─", hl_name },
-    { "╮", hl_name },
-    { "│", hl_name },
-    { "╯", hl_name },
-    { "─", hl_name },
-    { "╰", hl_name },
-    { "│", hl_name },
-  }
-end
+local cmp = require "cmp"
 
 local options = {
-  completion = {
-    completeopt = "menu,menuone",
-  },
-  window = {
-    completion = {
-      side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
-      winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
-      scrollbar = true,
-    },
-    documentation = {
-      border = border "CmpDocBorder",
-      winhighlight = "Normal:CmpDoc",
-    },
-  },
+  completion = { completeopt = "menu,menuone" },
+
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
     end,
   },
-  formatting = formatting_style,
-  mapping = cmp.mapping.preset.insert {
-    ["<C-S-Up>"] = cmp.mapping.scroll_docs(-1),
-    ["<C-S-Down>"] = cmp.mapping.scroll_docs(1),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
-  },
+
   -- mapping = {
   --   ["<C-p>"] = cmp.mapping.select_prev_item(),
   --   ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -106,6 +44,15 @@ local options = {
   --     end
   --   end, { "i", "s" }),
   -- },
+
+  mapping = cmp.mapping.preset.insert {
+    ["<C-S-Up>"] = cmp.mapping.scroll_docs(-1),
+    ["<C-S-Down>"] = cmp.mapping.scroll_docs(1),
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
+  },
+
   sources = {
     { name = "nvim_lsp" },
     { name = "luasnip" },
@@ -113,16 +60,10 @@ local options = {
     { name = "nvim_lua" },
     { name = "path" },
   },
+
   experimental = {
     ghost_text = vim.g.ui_cmp_ghost_text,
   },
 }
 
-if cmp_style ~= "atom" and cmp_style ~= "atom_colored" then
-  -- options.window.completion.border = border "CmpBorder"
-  options.window.completion.border = vim.g.ui_border
-  options.window.documentation.border = vim.g.ui_border
-  options.window.documentation.winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None"
-end
-
-return options
+return vim.tbl_deep_extend("force", options, require "utils.ui.cmp")

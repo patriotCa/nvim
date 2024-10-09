@@ -1,6 +1,6 @@
 dofile(vim.g.base46_cache .. "telescope")
 
-local options = {
+return {
   defaults = {
     prompt_prefix = "   ",
     selection_caret = " ",
@@ -19,6 +19,7 @@ local options = {
       n = { ["q"] = require("telescope.actions").close },
     },
   },
+
   extensions_list = { "themes", "terms" },
   extensions = {
     fzf = {
@@ -29,5 +30,3 @@ local options = {
     },
   },
 }
-
-return options

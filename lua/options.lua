@@ -1,26 +1,25 @@
 -- require "nvchad.options"
 
--- add yours here!
+local opt = vim.opt
 local o = vim.o
 local g = vim.g
-local opt = vim.opt
--------------------------------------- globals -----------------------------------------
 
+-------------------------------------- globals -----------------------------------------
 g.toggle_theme_icon = "   "
 g.ui_border = require("chadrc").ui.border
 g.ui_accent = require("chadrc").ui.accent
 g.ui_lspsaga = require("chadrc").ui.lspsaga
 g.ui_cmp_ghost_text = require("chadrc").ui.cmp.ghost_text
+g.ui_cmp_csborder = require("chadrc").ui.cmp.csborder
 g.lsp_virtual_text = require("chadrc").lsp.virtual_text
 
 -------------------------------------- options ------------------------------------------
-
 o.laststatus = 3
 o.showmode = false
 
 o.clipboard = "unnamedplus"
 o.cursorline = true
--- o.cursorlineopt = "number"
+o.cursorlineopt = "both"
 
 -- Indenting
 o.expandtab = true
@@ -55,8 +54,6 @@ o.updatetime = 250
 -- when cursor reaches end/beginning of line
 opt.whichwrap:append "<>[]hl"
 
--- g.mapleader = " "
-
 -- disable some default providers
 g.loaded_node_provider = 0
 g.loaded_python3_provider = 0
@@ -68,8 +65,6 @@ local is_windows = vim.fn.has "win32" ~= 0
 local sep = is_windows and "\\" or "/"
 local delim = is_windows and ";" or ":"
 vim.env.PATH = table.concat({ vim.fn.stdpath "data", "mason", "bin" }, sep) .. delim .. vim.env.PATH
-
-o.cursorlineopt = "both" -- to enable cursorline!
 
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.wrap = false -- Disable line wrap
@@ -84,3 +79,8 @@ vim.filetype.add {
     [".zshenv"] = "sh",
   },
 }
+
+-- add yours here!
+
+-- local o = vim.o
+-- o.cursorlineopt ='both' -- to enable cursorline!

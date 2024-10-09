@@ -33,4 +33,6 @@ local options = {
   notify_on_error = true,
 }
 
-require("conform").setup(options)
+-- require("conform").setup(options)
+
+return options
