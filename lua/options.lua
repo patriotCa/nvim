@@ -1,6 +1,6 @@
 require("nvchad.options")
 
--- add yours here!
+-- add yours here! ROOT
 
 local opt = vim.opt
 local o = vim.o
