@@ -1,0 +1,52 @@
+{
+  "typescriptReactNativePaperArrowFunctionComponent": {
+    "prefix": "tsrnpfc",
+    "description": "Creates a React Native Paper Arrow Function Component with ES7 module system in TypeScript.",
+    "body": [
+      "import React from 'react';",
+      "import { View } from 'react-native';",
+      "import { Text } from 'react-native-paper';",
+      "",
+      "type Props = {};",
+      "",
+      "const ${1:${TM_FILENAME_BASE}} = (props: Props) => {",
+      "  return (",
+      "    <View>",
+      "      <Text variant='displaySmall'>Welcome to ${1:first} !</Text>",
+      "    </View>",
+      "  );",
+      "};",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}};"
+    ]
+  },
+  "typescriptReactNativePaperArrowFunctionComponentWithStyles": {
+    "prefix": "tsrnpfcs",
+    "description": "Creates a React Native Paper Arrow Function Component with ES7 module system, TypeScript interface and StyleSheet.",
+    "body": [
+      "import React from 'react';",
+      "import { StyleSheet, View } from 'react-native';",
+      "import { Text } from 'react-native-paper';",
+      "",
+      "type Props = {};",
+      "",
+      "const ${1:${TM_FILENAME_BASE}} = (props: Props) => {",
+      "  return (",
+      "    <View style={[styles.container]}>",
+      "      <Text variant='displaySmall'>Welcome to ${1:first} !</Text>",
+      "    </View>",
+      "  );",
+      "};",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}};",
+      "",
+      "const styles = StyleSheet.create({",
+      "  container: {",
+      "    flex: 1,",
+      "    justifyContent: 'center',",
+      "    alignItems: 'center',",
+      "  },",
+      "});"
+    ]
+  }
+}
